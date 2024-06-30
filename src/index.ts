@@ -1,9 +1,11 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import { logger } from "./utils";
-import { registerAsAdmin } from "./controllers/CredentialController";
+import { authRouter } from "./routes";
+import { responseError } from "./middleware";
 
 // Config
 const PORT = process.env.PORT || 3001;
@@ -13,14 +15,12 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors());
 
-app.get("hello-world", (req: Request, res: Response) => {
-  res.status(200).json({
-    msg: "Hello World!!!",
-  });
-});
+app.use(authRouter);
 
-app.post("/register/as-admin", registerAsAdmin);
+// Global error handler
+app.use(responseError);
 
 app.listen(PORT, () => {
   logger("info", `App running on port ${PORT}`);
