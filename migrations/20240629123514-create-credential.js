@@ -15,7 +15,10 @@ module.exports = {
         type: Sequelize.STRING,
         validate: {
           notEmpty: {
-            msg: "Password required!",
+            msg: "Username required!",
+          },
+          isUnique: {
+            msg: "Username already used!",
           },
         },
       },
@@ -38,6 +41,9 @@ module.exports = {
           },
           notEmpty: {
             msg: "Password required!",
+          },
+          isUnique: {
+            msg: "Email already used!",
           },
         },
       },

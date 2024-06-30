@@ -1,9 +1,9 @@
 export const config = {
   development: {
-    username: "root",
-    password: "",
-    database: "leap_db",
-    host: "127.0.0.1",
+    username: process.env.DB_USERNAME_DEV || "",
+    password: process.env.DB_PASSWORD_DEV || "",
+    database: process.env.DB_NAME_DEV || "",
+    host: process.env.DB_HOST_DEV || "",
     dialect: "mysql",
   },
   test: {
