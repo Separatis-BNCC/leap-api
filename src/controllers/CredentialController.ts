@@ -1,24 +1,125 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Credential } from "../models";
+import { ValidationError } from "sequelize";
+import bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-export const registerAsAdmin = async (req: Request, res: Response) => {
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
+    const { admin } = req.query;
+
+    if (admin) {
+      const isExist = await Credential.count({
+        where: {
+          role: 0,
+        },
+      });
+
+      if (isExist)
+        return next({
+          status: 400,
+          msg: "Can't resgister more than one admin!",
+        });
+    }
+
     const { username, email, password } = await req.body;
 
-    let data = await Credential.create({
+    const data = await Credential.create({
       username,
       email,
       password,
-      role: 0,
+      role: admin ? 1 : 4,
     });
 
-    res.status(200).json({
-      data,
+    const token = jwt.sign(
+      {
+        email: data.email,
+        role: data.role,
+        username: data.username,
+      },
+      process.env.JWT_KEY || ""
+    );
+
+    return res.status(200).json({
+      status: 200,
+      msg: "Success",
+      data: {
+        email: data.email,
+        role: data.role,
+        username: data.username,
+        token,
+      },
     });
   } catch (err: any) {
-    console.log(err.errors);
+    if ((err.name = "SequelizeValidationError")) {
+      const errors = err.errors.map((error: ValidationError) => error.message);
 
-    res.status(500).json({
+      return next({
+        status: 400,
+        msg: errors,
+      });
+    }
+
+    return next({
+      status: 500,
+      msg: "Server error!",
+    });
+  }
+};
+
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { username, password } = await req.body;
+
+    const data = await Credential.findOne({
+      where: {
+        username,
+      },
+      attributes: ["username", "password", "email", "role"],
+    });
+
+    if (!data)
+      return next({
+        status: 400,
+        msg: "Invalid username or password!",
+      });
+
+    if (!bcryptjs.compareSync(password, data.password))
+      return next({
+        status: 400,
+        msg: "Invalid username or password!",
+      });
+
+    const token = jwt.sign(
+      {
+        email: data.email,
+        role: data.role,
+        username: data.username,
+      },
+      process.env.JWT_KEY || ""
+    );
+
+    return res.status(200).json({
+      status: 200,
+      msg: "Success",
+      data: {
+        email: data.email,
+        role: data.role,
+        username: data.username,
+        token,
+      },
+    });
+  } catch (err) {
+    return next({
+      status: 500,
       msg: "Server error!",
     });
   }
