@@ -1,5 +1,5 @@
 "use strict";
-import { Sequelize } from "sequelize";
+import { Dialect, Sequelize } from "sequelize";
 import { config } from "../config/config";
 
 let sequelize = new Sequelize(
@@ -7,11 +7,11 @@ let sequelize = new Sequelize(
   config.development.username,
   config.development.password,
   {
-    username: "root",
-    password: "",
-    database: "leap_db",
-    host: "127.0.0.1",
-    dialect: "mysql",
+    username: config.development.username,
+    password: config.development.password,
+    database: config.development.database,
+    host: config.development.host,
+    dialect: config.development.dialect as Dialect,
   }
 );
 

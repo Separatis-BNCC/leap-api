@@ -3,6 +3,7 @@ import { Credential } from "../models";
 import { ValidationError } from "sequelize";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { successRes } from "../utils";
 
 export const register = async (
   req: Request,
@@ -15,7 +16,7 @@ export const register = async (
     if (admin) {
       const isExist = await Credential.count({
         where: {
-          role: 0,
+          role: 1,
         },
       });
 
@@ -44,19 +45,15 @@ export const register = async (
       process.env.JWT_KEY || ""
     );
 
-    return res.status(200).json({
-      status: 200,
-      msg: "Success",
-      data: {
-        email: data.email,
-        role: data.role,
-        username: data.username,
-        token,
-      },
+    return successRes(res, {
+      email: data.email,
+      role: data.role,
+      username: data.username,
+      token,
     });
   } catch (err: any) {
     if ((err.name = "SequelizeValidationError")) {
-      const errors = err.errors.map((error: ValidationError) => error.message);
+      const errors = err.errors?.map((error: ValidationError) => error.message);
 
       return next({
         status: 400,
@@ -107,15 +104,11 @@ export const login = async (
       process.env.JWT_KEY || ""
     );
 
-    return res.status(200).json({
-      status: 200,
-      msg: "Success",
-      data: {
-        email: data.email,
-        role: data.role,
-        username: data.username,
-        token,
-      },
+    return successRes(res, {
+      email: data.email,
+      role: data.role,
+      username: data.username,
+      token,
     });
   } catch (err) {
     return next({
