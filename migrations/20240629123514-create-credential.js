@@ -9,19 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      username: {
-        unique: true,
-        allowNull: false,
-        type: Sequelize.STRING,
-        validate: {
-          notEmpty: {
-            msg: "Username required!",
-          },
-          isUnique: {
-            msg: "Username already used!",
-          },
-        },
-      },
       password: {
         allowNull: false,
         type: Sequelize.STRING,

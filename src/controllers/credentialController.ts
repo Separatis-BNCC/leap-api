@@ -30,7 +30,6 @@ export const register = async (
     const { username, email, password } = await req.body;
 
     const data = await Credential.create({
-      username,
       email,
       password,
       role: admin ? 1 : 4,
@@ -40,7 +39,6 @@ export const register = async (
       {
         email: data.email,
         role: data.role,
-        username: data.username,
       },
       process.env.JWT_KEY || ""
     );
@@ -48,7 +46,6 @@ export const register = async (
     return successRes(res, {
       email: data.email,
       role: data.role,
-      username: data.username,
       token,
     });
   } catch (err: any) {
@@ -74,32 +71,31 @@ export const login = async (
   next: NextFunction
 ) => {
   try {
-    const { username, password } = await req.body;
+    const { email, password } = await req.body;
 
     const data = await Credential.findOne({
       where: {
-        username,
+        email,
       },
-      attributes: ["username", "password", "email", "role"],
+      attributes: ["password", "email", "role"],
     });
 
     if (!data)
       return next({
         status: 400,
-        msg: "Invalid username or password!",
+        msg: "Invalid email or password!",
       });
 
     if (!bcryptjs.compareSync(password, data.password))
       return next({
         status: 400,
-        msg: "Invalid username or password!",
+        msg: "Invalid email or password!",
       });
 
     const token = jwt.sign(
       {
         email: data.email,
         role: data.role,
-        username: data.username,
       },
       process.env.JWT_KEY || ""
     );
@@ -107,7 +103,6 @@ export const login = async (
     return successRes(res, {
       email: data.email,
       role: data.role,
-      username: data.username,
       token,
     });
   } catch (err) {
