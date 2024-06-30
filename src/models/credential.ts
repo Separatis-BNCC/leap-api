@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 
 interface CredentialAttributes {
   id?: number;
-  username: string;
   email: string;
   password: string;
   role: number;
@@ -20,7 +19,6 @@ class Credential
   implements CredentialAttributes
 {
   public id!: number;
-  public username!: string;
   public email!: string;
   public password!: string;
   public role!: number;
@@ -31,19 +29,6 @@ class Credential
 
 Credential.init(
   {
-    username: {
-      unique: {
-        name: "username_unique",
-        msg: "Username already used!",
-      },
-      allowNull: false,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          msg: "Username required!",
-        },
-      },
-    },
     password: {
       allowNull: false,
       type: DataTypes.STRING,
