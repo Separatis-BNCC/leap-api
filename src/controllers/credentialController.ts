@@ -1,15 +1,11 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { Credential } from "../models";
 import { ValidationError } from "sequelize";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { successRes } from "../utils";
+import { errBadRequest, errInternalServer, successRes } from "../utils";
 
-export const register = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const register: RequestHandler = async (req, res, next) => {
   try {
     const { admin } = req.query;
 
@@ -21,13 +17,10 @@ export const register = async (
       });
 
       if (isExist)
-        return next({
-          status: 400,
-          msg: "Can't resgister more than one admin!",
-        });
+        return errBadRequest(next, "Can't resgister more than one admin!");
     }
 
-    const { username, email, password } = await req.body;
+    const { email, password } = await req.body;
 
     const data = await Credential.create({
       email,
@@ -52,24 +45,14 @@ export const register = async (
     if ((err.name = "SequelizeValidationError")) {
       const errors = err.errors?.map((error: ValidationError) => error.message);
 
-      return next({
-        status: 400,
-        msg: errors,
-      });
+      return errBadRequest(next, errors);
     }
 
-    return next({
-      status: 500,
-      msg: "Server error!",
-    });
+    return errInternalServer(next);
   }
 };
 
-export const login = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const login: RequestHandler = async (req, res, next) => {
   try {
     const { email, password } = await req.body;
 
@@ -80,17 +63,10 @@ export const login = async (
       attributes: ["password", "email", "role"],
     });
 
-    if (!data)
-      return next({
-        status: 400,
-        msg: "Invalid email or password!",
-      });
+    if (!data) return errBadRequest(next, "Invalid email or password!");
 
     if (!bcryptjs.compareSync(password, data.password))
-      return next({
-        status: 400,
-        msg: "Invalid email or password!",
-      });
+      return errBadRequest(next, "Invalid email or password!");
 
     const token = jwt.sign(
       {
@@ -106,9 +82,6 @@ export const login = async (
       token,
     });
   } catch (err) {
-    return next({
-      status: 500,
-      msg: "Server error!",
-    });
+    return errInternalServer(next);
   }
 };
