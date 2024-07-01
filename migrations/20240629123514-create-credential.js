@@ -12,31 +12,16 @@ module.exports = {
       password: {
         allowNull: false,
         type: Sequelize.STRING,
-        validate: {
-          notEmpty: {
-            msg: "Password required!",
-          },
-        },
       },
       email: {
         unique: true,
         allowNull: false,
         type: Sequelize.STRING,
-        validate: {
-          isEmail: {
-            msg: "Invalid email format!",
-          },
-          notEmpty: {
-            msg: "Password required!",
-          },
-          isUnique: {
-            msg: "Email already used!",
-          },
-        },
       },
       role: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        defaultValue: 4,
       },
       createdAt: {
         allowNull: false,

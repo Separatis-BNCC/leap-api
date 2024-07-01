@@ -1,7 +1,8 @@
 "use strict";
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Association } from "sequelize";
 import connection from "./connection";
 import bcrypt from "bcryptjs";
+import Profile from "./profile";
 
 interface CredentialAttributes {
   id?: number;
@@ -73,5 +74,7 @@ Credential.init(
     modelName: "Credential",
   }
 );
+
+Credential.hasOne(Profile, { foreignKey: "id", as: "profile" });
 
 export default Credential;
