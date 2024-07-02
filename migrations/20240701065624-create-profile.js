@@ -8,13 +8,13 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        references: { model: 'Credentials', key: 'id' }
+        references: { model: "Credentials", key: "id" },
       },
-      firstName: {
+      first_name: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      lastName: {
+      last_name: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      birthDate: {
+      birth_date: {
         allowNull: false,
         type: Sequelize.DATE,
       },
@@ -37,10 +37,6 @@ module.exports = {
       major: {
         allowNull: false,
         type: Sequelize.INTEGER,
-      },
-      phone_number: {
-        allowNull: false,
-        type: Sequelize.STRING,
       },
       line_id: {
         allowNull: false,

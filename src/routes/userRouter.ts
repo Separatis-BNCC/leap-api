@@ -10,6 +10,6 @@ const userRouter = express.Router();
 userRouter.use(authenticationMiddleware);
 userRouter.use(authorizationMiddleware);
 
-userRouter.get("/admin/users", getUsers);
+userRouter.get("/", getUsers);
 
 export { userRouter };

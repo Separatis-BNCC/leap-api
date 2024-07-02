@@ -23,7 +23,6 @@ export const getUsers: RequestHandler = async (req, res, next) => {
 
     return successRes(res, data);
   } catch (err) {
-    console.log(err);
     return errInternalServer(next);
   }
 };
