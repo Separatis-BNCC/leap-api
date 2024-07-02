@@ -4,9 +4,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 import { logger, successRes } from "./utils";
-import { authRouter } from "./routes";
+import { authRouter, profileRouter, userRouter } from "./routes";
 import { responseError } from "./middleware";
-import { userRouter } from "./routes/userRouter";
 
 // Config
 const PORT = process.env.PORT || 3001;
@@ -22,9 +21,9 @@ app.get("/", (req, res) => {
   return successRes(res, "Welcome to BNCC Leap!");
 });
 
-app.use(authRouter);
-
-app.use(userRouter);
+app.use("/users", userRouter);
+app.use("/profiles", profileRouter);
+app.use("/", authRouter);
 
 // Global error handler
 app.use(responseError);

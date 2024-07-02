@@ -4,14 +4,13 @@ import connection from "./connection";
 
 interface ProfileAttributes {
   id?: number;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   nim: string;
-  birthDate: Date;
+  birth_date: Date;
   region: number;
   faculty: number;
   major: number;
-  phone_number: string;
   line_id: string;
 
   updatedAt?: Date;
@@ -21,14 +20,13 @@ interface ProfileAttributes {
 
 class Profile extends Model<ProfileAttributes> implements ProfileAttributes {
   public id?: number;
-  public firstName!: string;
-  public lastName!: string;
+  public first_name!: string;
+  public last_name!: string;
   public nim!: string;
-  public birthDate!: Date;
+  public birth_date!: Date;
   public region!: number;
   public faculty!: number;
   public major!: number;
-  public phone_number!: string;
   public line_id!: string;
 
   public readonly updatedAt!: Date;
@@ -37,21 +35,21 @@ class Profile extends Model<ProfileAttributes> implements ProfileAttributes {
 
 Profile.init(
   {
-    firstName: {
+    first_name: {
       allowNull: false,
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Password required!",
+          msg: "First name required!",
         },
       },
     },
-    lastName: {
+    last_name: {
       allowNull: false,
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Password required!",
+          msg: "Last name required!",
         },
       },
     },
@@ -60,16 +58,20 @@ Profile.init(
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Password required!",
+          msg: "NIM required!",
         },
       },
     },
-    birthDate: {
+    birth_date: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
       validate: {
         notEmpty: {
-          msg: "Password required!",
+          msg: "Birth date required!",
+        },
+        isDate: {
+          args: true,
+          msg: "Date invalid!",
         },
       },
     },
@@ -78,7 +80,7 @@ Profile.init(
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Password required!",
+          msg: "Region required!",
         },
       },
     },
@@ -87,7 +89,7 @@ Profile.init(
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Password required!",
+          msg: "Faculty required!",
         },
       },
     },
@@ -96,16 +98,7 @@ Profile.init(
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Password required!",
-        },
-      },
-    },
-    phone_number: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          msg: "Password required!",
+          msg: "Major required!",
         },
       },
     },
@@ -114,7 +107,7 @@ Profile.init(
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Password required!",
+          msg: "ID Line required!",
         },
       },
     },

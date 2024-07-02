@@ -29,6 +29,7 @@ export const authenticationMiddleware: RequestHandler = async (
     req.headers.user = JSON.stringify({
       email: isValid.email,
       role: isValid.role,
+      id: isValid.id,
     });
 
     return next();
