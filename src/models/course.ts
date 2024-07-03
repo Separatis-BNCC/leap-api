@@ -1,6 +1,7 @@
 "use strict";
 import { Model, DataTypes } from "sequelize";
 import connection from "./connection";
+import Class from "./class";
 
 interface CourseAttributes {
   id?: number;
@@ -47,5 +48,7 @@ Course.init(
     modelName: "Course",
   }
 );
+
+Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 
 export default Course;

@@ -4,7 +4,13 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 import { logger, successRes } from "./utils";
-import { authRouter, courseRouter, profileRouter, userRouter } from "./routes";
+import {
+  authRouter,
+  classRouter,
+  courseRouter,
+  profileRouter,
+  userRouter,
+} from "./routes";
 import { responseError } from "./middleware";
 
 // Config
@@ -24,6 +30,7 @@ app.get("/", (req, res) => {
 app.use("/users", userRouter);
 app.use("/profiles", profileRouter);
 app.use("/courses", courseRouter);
+app.use("/classes", classRouter);
 app.use("/", authRouter);
 
 // Global error handler
