@@ -1,5 +1,5 @@
 "use strict";
-import { Model, DataTypes, Association } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import connection from "./connection";
 import bcrypt from "bcryptjs";
 import Profile from "./profile";
