@@ -1,5 +1,10 @@
 import { RequestHandler } from "express";
-import { errBadRequest, errInternalServer, successRes } from "../utils";
+import {
+  errBadRequest,
+  errInternalServer,
+  errNotFound,
+  successRes,
+} from "../utils";
 import { Course, Class } from "../models";
 import { ValidationError } from "sequelize";
 
@@ -35,14 +40,43 @@ export const getCourses: RequestHandler = async (req, res, next) => {
         model: Class,
         attributes: {
           exclude: ["createdAt", "updatedAt"],
-        }
+        },
       },
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
     });
+
     return successRes(res, data);
   } catch (err: any) {
+    return errInternalServer(next);
+  }
+};
+
+export const getCourse: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Course.findOne({
+      where: {
+        id,
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      include: {
+        as: "classes",
+        model: Class,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    });
+
+    if (!data) return errNotFound(next, `Course with id ${id} not found!`);
+
+    return successRes(res, data);
+  } catch (err) {
     return errInternalServer(next);
   }
 };
