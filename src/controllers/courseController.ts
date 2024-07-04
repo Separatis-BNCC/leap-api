@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { errBadRequest, errInternalServer, successRes } from "../utils";
-import { Course } from "../models";
+import { Course, Class } from "../models";
 import { ValidationError } from "sequelize";
 
 export const createCourse: RequestHandler = async (req, res, next) => {
@@ -27,4 +27,22 @@ export const createCourse: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const getCourse = async () => {};
+export const getCourses: RequestHandler = async (req, res, next) => {
+  try {
+    const data = await Course.findAll({
+      include: {
+        as: "classes",
+        model: Class,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        }
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+    return successRes(res, data);
+  } catch (err: any) {
+    return errInternalServer(next);
+  }
+};

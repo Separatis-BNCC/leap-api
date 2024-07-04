@@ -1,5 +1,5 @@
 import express from "express";
-import { createCourse } from "../controllers";
+import { createCourse, getCourses } from "../controllers";
 import {
   authenticationMiddleware,
   authorizationMiddleware,
@@ -10,5 +10,6 @@ const courseRouter = express.Router();
 courseRouter.use(authenticationMiddleware);
 courseRouter.use(authorizationMiddleware);
 courseRouter.post("/", createCourse);
+courseRouter.get("/", getCourses);
 
 export { courseRouter };
