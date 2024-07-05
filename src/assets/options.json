@@ -1,0 +1,36 @@
+{
+  "regions": [
+    {
+      "id": 1,
+      "label": "Kemanggisan",
+      "faculties": [
+        {
+          "id": 1,
+          "label": "SOCS",
+          "majors": [
+            {
+              "id": 1,
+              "label": "Computer Science"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Bandung",
+      "faculties": [
+        {
+          "id": 1,
+          "label": "SOCS",
+          "majors": [
+            {
+              "id": 1,
+              "label": "Computer Science"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
