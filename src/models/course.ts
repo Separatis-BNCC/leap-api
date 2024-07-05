@@ -48,6 +48,11 @@ Course.init(
     status: {
       type: DataTypes.INTEGER,
       defaultValue: 1,
+      validate: {
+        isNumeric: {
+          msg: "Status must be a number!",
+        },
+      },
     },
   },
   {

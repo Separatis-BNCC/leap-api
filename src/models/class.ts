@@ -82,10 +82,20 @@ Class.init(
     status: {
       type: DataTypes.INTEGER,
       defaultValue: 1,
+      validate: {
+        isNumeric: {
+          msg: "Status must be a number!",
+        },
+      },
     },
     course_id: {
       allowNull: false,
       type: DataTypes.INTEGER,
+      validate: {
+        isNumeric: {
+          msg: "Course ID must be a number!",
+        },
+      },
     },
   },
   {
