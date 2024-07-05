@@ -8,6 +8,7 @@ interface ClassAttributes {
   day_of_week: number;
   hour: number;
   minute: number;
+  status?: number;
   course_id: number;
 
   updatedAt?: Date;
@@ -21,6 +22,7 @@ class Class extends Model<ClassAttributes> implements ClassAttributes {
   public day_of_week!: number;
   public hour!: number;
   public minute!: number;
+  public status!: number;
   public course_id!: number;
 
   public readonly updatedAt!: Date;
@@ -76,6 +78,10 @@ Class.init(
           msg: "Invalid time!",
         },
       },
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
     },
     course_id: {
       allowNull: false,

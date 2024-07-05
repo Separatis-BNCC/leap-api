@@ -70,6 +70,9 @@ export const editClass: RequestHandler = async (req, res, next) => {
       }
     );
 
+    if (!data[0])
+      return errNotFound(next, `Class with id ${id} does not exist!`);
+
     return successRes(res, `Success edit class with id ${id}!`);
   } catch (err: any) {
     if ((err.name = "SequelizeValidationError")) {
@@ -78,6 +81,45 @@ export const editClass: RequestHandler = async (req, res, next) => {
       return errBadRequest(next, errors);
     }
 
+    return errInternalServer(next);
+  }
+};
+
+export const getClassById: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Class.findOne({
+      where: {
+        id,
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    if (!data) return errNotFound(next, `Course with id ${id} does not exist!`);
+
+    return successRes(res, data);
+  } catch (err: any) {
+    return errInternalServer(next);
+  }
+};
+
+export const deleteClass: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Class.destroy({
+      where: {
+        id,
+      },
+    });
+
+    if (!data) return errNotFound(next, `Class with id ${id} does not exist!`);
+
+    return successRes(res, `Course with id ${id} deleted successfully!`);
+  } catch (err: any) {
     return errInternalServer(next);
   }
 };

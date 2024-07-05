@@ -9,6 +9,7 @@ import {
   classRouter,
   courseRouter,
   profileRouter,
+  sessionRouter,
   userRouter,
 } from "./routes";
 import { responseError } from "./middleware";
@@ -24,13 +25,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  return successRes(res, "Welcome to BNCC Leap!");
+  return successRes(res, "Welcome to BNCC Leap API!");
 });
 
 app.use("/users", userRouter);
 app.use("/profiles", profileRouter);
 app.use("/courses", courseRouter);
 app.use("/classes", classRouter);
+app.use("/sessions", sessionRouter);
 app.use("/", authRouter);
 
 // Global error handler

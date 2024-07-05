@@ -6,12 +6,12 @@ import {
   successRes,
 } from "../utils";
 import { Credential, Profile } from "../models";
-import { Op } from "sequelize";
+import { Op, ValidationError } from "sequelize";
 
 export const getUsers: RequestHandler = async (req, res, next) => {
   try {
     const data = await Credential.findAll({
-      attributes: ["id", "email", "role"],
+      attributes: ["id", "email", "role", "active"],
       include: {
         as: "profile",
         model: Profile,
@@ -37,7 +37,7 @@ export const getUser: RequestHandler = async (req, res, next) => {
     const { id } = req.params;
 
     const data = await Credential.findOne({
-      attributes: ["id", "email", "role"],
+      attributes: ["id", "email", "role", "active"],
       include: {
         as: "profile",
         model: Profile,
@@ -53,15 +53,20 @@ export const getUser: RequestHandler = async (req, res, next) => {
     if (!data) return errNotFound(next, `User with id ${id} not found`);
 
     return successRes(res, data);
-  } catch (err) {
+  } catch (err: any) {
+    if ((err.name = "SequelizeValidationError")) {
+      const errors = err.errors?.map((error: ValidationError) => error.message);
+
+      return errBadRequest(next, errors);
+    }
+
     return errInternalServer(next);
   }
 };
 
 export const changeUserRole: RequestHandler = async (req, res, next) => {
   try {
-    const { ids } = req.body;
-    const { role } = req.body;
+    const { ids, role } = req.body;
 
     const users = await Credential.findAll({
       where: {
@@ -81,7 +86,7 @@ export const changeUserRole: RequestHandler = async (req, res, next) => {
       }
     );
 
-    return successRes(res, data);
+    return successRes(res, "Success update role!");
   } catch (err) {
     return errInternalServer(next);
   }
@@ -93,8 +98,7 @@ export const changeUserActiveStatus: RequestHandler = async (
   next
 ) => {
   try {
-    const { ids } = req.body;
-    const { active } = req.body;
+    const { ids, active } = req.body;
 
     const users = await Credential.findAll({
       where: {
@@ -114,8 +118,14 @@ export const changeUserActiveStatus: RequestHandler = async (
       }
     );
 
-    return successRes(res, data);
-  } catch (err) {
+    return successRes(res, "Success update active!");
+  } catch (err: any) {
+    if ((err.name = "SequelizeValidationError")) {
+      const errors = err.errors?.map((error: ValidationError) => error.message);
+
+      return errBadRequest(next, errors);
+    }
+
     return errInternalServer(next);
   }
 };

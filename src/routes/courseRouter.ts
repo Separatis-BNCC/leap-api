@@ -1,5 +1,12 @@
 import express from "express";
-import { createCourse, getCourse, getCourses } from "../controllers";
+import {
+  changeCourseStatus,
+  createCourse,
+  deleteCourse,
+  editCourse,
+  getCourse,
+  getCourses,
+} from "../controllers";
 import {
   authenticationMiddleware,
   authorizationMiddleware,
@@ -8,9 +15,13 @@ import {
 const courseRouter = express.Router();
 
 courseRouter.use(authenticationMiddleware);
+courseRouter.get("/", getCourses);
+
 courseRouter.use(authorizationMiddleware);
 courseRouter.post("/", createCourse);
 courseRouter.get("/:id", getCourse);
-courseRouter.get("/", getCourses);
+courseRouter.put("/status/:id", changeCourseStatus);
+courseRouter.put("/:id", editCourse);
+courseRouter.delete("/:id", deleteCourse);
 
 export { courseRouter };

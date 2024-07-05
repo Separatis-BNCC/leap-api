@@ -60,6 +60,22 @@ Credential.init(
     role: {
       allowNull: false,
       type: DataTypes.INTEGER,
+      validate: {
+        isNumeric: {
+          msg: "Role must be a number!",
+        },
+      },
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      validate: {
+        isBoolean(value: any) {
+          if (typeof value !== "boolean") {
+            throw new Error("Active must be a boolean!");
+          }
+        },
+      },
     },
   },
   {

@@ -23,6 +23,11 @@ module.exports = {
       minute: {
         type: Sequelize.INTEGER,
       },
+      status: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+      },
       course_id: {
         allowNull: false,
         type: Sequelize.INTEGER,

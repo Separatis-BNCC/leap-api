@@ -2,11 +2,13 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "./connection";
 import Class from "./class";
+import Session from "./session";
 
 interface CourseAttributes {
   id?: number;
   name: string;
   region: number;
+  status?: number;
 
   updatedAt?: Date;
   deletedAt?: Date;
@@ -17,6 +19,7 @@ class Course extends Model<CourseAttributes> implements CourseAttributes {
   public id!: number;
   public name!: string;
   public region!: number;
+  public status!: number;
 
   public readonly updatedAt!: Date;
   public readonly createdAt!: Date;
@@ -42,6 +45,10 @@ Course.init(
         },
       },
     },
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
   },
   {
     sequelize: connection,
@@ -50,5 +57,6 @@ Course.init(
 );
 
 Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
+Course.hasMany(Session, { foreignKey: "course_id", as: "sessions" });
 
 export default Course;
