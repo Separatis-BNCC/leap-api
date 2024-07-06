@@ -1,7 +1,13 @@
 import { RequestHandler } from "express";
-import { errBadRequest, errInternalServer, successRes } from "../utils";
+import {
+  errBadRequest,
+  errInternalServer,
+  successRes,
+  errNotFound,
+} from "../utils";
 import { Profile } from "../models";
 import { ValidationError } from "sequelize";
+import options from "../assets/options";
 
 export const createProfile: RequestHandler = async (req, res, next) => {
   try {
@@ -47,6 +53,58 @@ export const createProfile: RequestHandler = async (req, res, next) => {
       return errBadRequest(next, errors);
     }
 
+    return errInternalServer(next);
+  }
+};
+
+export const getRegions: RequestHandler = async (req, res, next) => {
+  try {
+    const data = options.regions.map((region) => {
+      return { id: region.id, label: region.label };
+    });
+
+    return successRes(res, data);
+  } catch (err: any) {
+    return errInternalServer(next);
+  }
+};
+
+export const getFaculties: RequestHandler = async (req, res, next) => {
+  try {
+    const { regionId } = req.params;
+
+    const selectedRegion = options.regions.find(
+      (region) => region.id === Number(regionId)
+    );
+
+    const data = selectedRegion?.faculties.map((faculty) => {
+      return { id: faculty.id, label: faculty.label };
+    });
+
+    return successRes(res, data);
+  } catch (err: any) {
+    return errInternalServer(next);
+  }
+};
+
+export const getMajors: RequestHandler = async (req, res, next) => {
+  try {
+    const { regionId, facultyId } = req.params;
+
+    const selectedRegion = options.regions.find(
+      (region) => region.id === Number(regionId)
+    );
+
+    const selectedFaculty = selectedRegion?.faculties.find(
+      (faculty) => faculty.id === Number(facultyId)
+    );
+
+    const data = selectedFaculty?.majors.map((major) => {
+      return { id: major.id, label: major.label };
+    });
+
+    return successRes(res, data);
+  } catch (err: any) {
     return errInternalServer(next);
   }
 };
