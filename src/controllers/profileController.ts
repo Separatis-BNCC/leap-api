@@ -77,6 +77,9 @@ export const getFaculties: RequestHandler = async (req, res, next) => {
       (region) => region.id === Number(regionId)
     );
 
+    if (!selectedRegion)
+      return errNotFound(next, `Region with id ${regionId} does not exist`);
+
     const data = selectedRegion?.faculties.map((faculty) => {
       return { id: faculty.id, label: faculty.label };
     });
@@ -95,9 +98,15 @@ export const getMajors: RequestHandler = async (req, res, next) => {
       (region) => region.id === Number(regionId)
     );
 
+    if (!selectedRegion)
+      return errNotFound(next, `Region with id ${regionId} does not exist`);
+
     const selectedFaculty = selectedRegion?.faculties.find(
       (faculty) => faculty.id === Number(facultyId)
     );
+
+    if (!selectedFaculty)
+      return errNotFound(next, `Faculty with id ${facultyId} does not exist`);
 
     const data = selectedFaculty?.majors.map((major) => {
       return { id: major.id, label: major.label };
