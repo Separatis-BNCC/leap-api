@@ -5,16 +5,36 @@ import {
   errNotFound,
   successRes,
 } from "../utils";
-import { Class, Course } from "../models";
+import { Class, Course, Session } from "../models";
 import { ValidationError } from "sequelize";
+import ClassSession from "../models/classSession";
 
 export const createClass: RequestHandler = async (req, res, next) => {
   try {
     const { course_id } = req.body;
 
-    const isCourseExist = await Course.findByPk(course_id);
+    const course = await Course.findOne({
+      where: {
+        id: course_id,
+      },
+      include: {
+        as: "sessions",
+        model: Session,
+        attributes: ["id"],
+      },
+      attributes: {
+        exclude: [
+          "createdAt",
+          "updatedAt",
+          "name",
+          "region",
+          "total_sessions",
+          "status",
+        ],
+      },
+    });
 
-    if (!isCourseExist)
+    if (!course)
       return errNotFound(next, `Course with id ${course_id} not found!`);
 
     const { name, day_of_week, hour, minute } = req.body;
@@ -26,6 +46,15 @@ export const createClass: RequestHandler = async (req, res, next) => {
       minute,
       course_id,
     });
+
+    const seedClassSessionsData = course.sessions.map(
+      ({ id }: { id: number }) => ({
+        class_id: data.id,
+        session_id: id,
+      })
+    );
+
+    await ClassSession.bulkCreate(seedClassSessionsData);
 
     return successRes(res, {
       id: data.id,
@@ -95,6 +124,16 @@ export const getClassById: RequestHandler = async (req, res, next) => {
       },
       attributes: {
         exclude: ["createdAt", "updatedAt"],
+      },
+      include: {
+        as: "sessions",
+        model: Session,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        through: {
+          attributes: [],
+        },
       },
     });
 
