@@ -35,15 +35,15 @@ export default {
           label: "SOIS",
           majors: [
             {
-              id: 1,
+              id: 6,
               label: "Business Analytics",
             },
             {
-              id: 2,
+              id: 7,
               label: "Information Systems Accounting and Auditing",
             },
             {
-              id: 3,
+              id: 8,
               label: "Information Systems",
             },
           ],
@@ -53,19 +53,19 @@ export default {
           label: "SOD (School of Design)",
           majors: [
             {
-              id: 1,
+              id: 9,
               label: "Interior Design",
             },
             {
-              id: 2,
+              id: 10,
               label: "Visual Communication Design - Animation",
             },
             {
-              id: 3,
+              id: 11,
               label: "Visual Communication Design - Creative Advertising",
             },
             {
-              id: 4,
+              id: 12,
               label: "Visual Communication Design - New Media",
             },
           ],
@@ -75,11 +75,11 @@ export default {
           label: "BINUS Business School Undergraduate Programs",
           majors: [
             {
-              id: 2,
+              id: 17,
               label: "Global Business Marketing",
             },
             {
-              id: 4,
+              id: 19,
               label: "Management",
             },
           ],
@@ -89,11 +89,11 @@ export default {
           label: "School of Accounting",
           majors: [
             {
-              id: 1,
+              id: 22,
               label: "Accounting",
             },
             {
-              id: 2,
+              id: 23,
               label: "Taxation",
             },
           ],
@@ -103,19 +103,19 @@ export default {
           label: "Faculty of Digital Communication and Hotel & Tourism",
           majors: [
             {
-              id: 1,
+              id: 25,
               label: "Communication - Mass Communication",
             },
             {
-              id: 2,
+              id: 26,
               label: "Communication - Marketing Communication",
             },
             {
-              id: 3,
+              id: 27,
               label: "Hotel Management",
             },
             {
-              id: 4,
+              id: 28,
               label: "Tourism",
             },
           ],
@@ -125,31 +125,31 @@ export default {
           label: "Faculty of Humanities",
           majors: [
             {
-              id: 1,
+              id: 31,
               label: "Law - Business Law",
             },
             {
-              id: 2,
+              id: 32,
               label: "Psychology",
             },
             {
-              id: 3,
+              id: 33,
               label: "Chinese Literature",
             },
             {
-              id: 4,
+              id: 34,
               label: "Japanese Literature",
             },
             {
-              id: 5,
+              id: 35,
               label: "English Literature",
             },
             {
-              id: 6,
+              id: 36,
               label: "International Relations",
             },
             {
-              id: 7,
+              id: 37,
               label: "Primary Teacher Education",
             },
           ],
@@ -159,19 +159,19 @@ export default {
           label: "Faculty of Engineering",
           majors: [
             {
-              id: 1,
+              id: 38,
               label: "Architecture",
             },
             {
-              id: 2,
+              id: 39,
               label: "Civil Engineering",
             },
             {
-              id: 3,
+              id: 40,
               label: "Industrial Engineering",
             },
             {
-              id: 4,
+              id: 41,
               label: "Computer Engineering",
             },
           ],
@@ -181,19 +181,19 @@ export default {
           label: "Double Programs",
           majors: [
             {
-              id: 1,
+              id: 44,
               label: "Computer Science and Mathematics",
             },
             {
-              id: 2,
+              id: 45,
               label: "Computer Science and Statistics",
             },
             {
-              id: 3,
+              id: 46,
               label: "Accounting and Information Systems",
             },
             {
-              id: 4,
+              id: 47,
               label: "Management and Information Systems",
             },
           ],
@@ -203,11 +203,11 @@ export default {
           label: "Master Track Programs",
           majors: [
             {
-              id: 1,
+              id: 50,
               label: "Master of Information Systems Management",
             },
             {
-              id: 2,
+              id: 51,
               label: "Master of Information Technology",
             },
           ],
@@ -233,7 +233,7 @@ export default {
           label: "SOIS",
           majors: [
             {
-              id: 3,
+              id: 8,
               label: "Information Systems",
             },
           ],
@@ -243,19 +243,19 @@ export default {
           label: "SOD (School of Design)",
           majors: [
             {
-              id: 2,
+              id: 10,
               label: "Visual Communication Design - Animation",
             },
             {
-              id: 4,
+              id: 12,
               label: "Visual Communication Design - New Media",
             },
             {
-              id: 5,
+              id: 13,
               label: "Film",
             },
             {
-              id: 6,
+              id: 14,
               label: "Fashion",
             },
           ],
@@ -265,19 +265,19 @@ export default {
           label: "BINUS Business School Undergraduate Programs",
           majors: [
             {
-              id: 1,
+              id: 16,
               label: "Business Creation",
             },
             {
-              id: 2,
+              id: 17,
               label: "Global Business Marketing",
             },
             {
-              id: 3,
+              id: 18,
               label: "International Business Management",
             },
             {
-              id: 4,
+              id: 19,
               label: "Management",
             },
           ],
@@ -287,11 +287,11 @@ export default {
           label: "School of Accounting",
           majors: [
             {
-              id: 1,
+              id: 22,
               label: "Accounting",
             },
             {
-              id: 3,
+              id: 24,
               label: "Finance",
             },
           ],
@@ -301,11 +301,11 @@ export default {
           label: "Faculty of Digital Communication and Hotel & Tourism",
           majors: [
             {
-              id: 1,
+              id: 25,
               label: "Communication - Mass Communication",
             },
             {
-              id: 2,
+              id: 26,
               label: "Communication - Marketing Communication",
             },
           ],
@@ -315,7 +315,7 @@ export default {
           label: "Faculty of Humanities",
           majors: [
             {
-              id: 3,
+              id: 33,
               label: "Chinese Literature",
             },
           ],
@@ -325,11 +325,11 @@ export default {
           label: "Faculty of Engineering",
           majors: [
             {
-              id: 5,
+              id: 42,
               label: "Biotechnology",
             },
             {
-              id: 6,
+              id: 43,
               label: "Food Technology",
             },
           ],
@@ -339,7 +339,7 @@ export default {
           label: "Master Track Programs",
           majors: [
             {
-              id: 3,
+              id: 52,
               label: "Master of Management",
             },
           ],
@@ -365,11 +365,11 @@ export default {
           label: "SOD (School of Design)",
           majors: [
             {
-              id: 1,
+              id: 9,
               label: "Interior Design",
             },
             {
-              id: 7,
+              id: 15,
               label: "Visual Communication Design",
             },
           ],
@@ -379,7 +379,7 @@ export default {
           label: "BINUS Business School Undergraduate Programs",
           majors: [
             {
-              id: 5,
+              id: 20,
               label: "Creativepreneurship",
             },
           ],
@@ -389,11 +389,11 @@ export default {
           label: "Double Programs",
           majors: [
             {
-              id: 1,
+              id: 48,
               label: "Interactive Design and Technology",
             },
             {
-              id: 2,
+              id: 49,
               label: "Digital Business Innovation",
             },
           ],
@@ -419,11 +419,11 @@ export default {
           label: "SOD (School of Design)",
           majors: [
             {
-              id: 1,
+              id: 9,
               label: "Interior Design",
             },
             {
-              id: 7,
+              id: 15,
               label: "Visual Communication Design",
             },
           ],
@@ -433,7 +433,7 @@ export default {
           label: "BINUS Business School Undergraduate Programs",
           majors: [
             {
-              id: 6,
+              id: 21,
               label: "Entrepreneurship - Business Creation",
             },
           ],
@@ -443,11 +443,11 @@ export default {
           label: "Faculty of Digital Communication and Hotel & Tourism",
           majors: [
             {
-              id: 5,
+              id: 29,
               label: "Communication",
             },
             {
-              id: 6,
+              id: 30,
               label: "Public Relations",
             },
           ],
@@ -457,11 +457,11 @@ export default {
           label: "Double Programs",
           majors: [
             {
-              id: 5,
+              id: 48,
               label: "Interactive Design and Technology",
             },
             {
-              id: 6,
+              id: 49,
               label: "Digital Business Innovation",
             },
           ],
@@ -493,209 +493,208 @@ export default {
 //   label: "Data Science",
 // },
 
-
 // SOIS
 // {
-//   id: 1,
+//   id: 6,
 //   label: "Business Analytics",
 // },
 // {
-//   id: 2,
+//   id: 7,
 //   label: "Information Systems Accounting and Auditing",
 // },
 // {
-//   id: 3,
+//   id: 8,
 //   label: "Information Systems",
 // },
 
 // SOD (School of Design)
 // {
-//   id: 1,
+//   id: 9,
 //   label: "Interior Design",
 // },
 // {
-//   id: 2,
+//   id: 10,
 //   label: "Visual Communication Design - Animation",
 // },
 // {
-//   id: 3,
+//   id: 11,
 //   label: "Visual Communication Design - Creative Advertising",
 // },
 // {
-//   id: 4,
+//   id: 12,
 //   label: "Visual Communication Design - New Media",
 // },
 // {
-//   id: 5,
+//   id: 13,
 //   label: "Film",
 // },
 // {
-//   id: 6,
+//   id: 14,
 //   label: "Fashion",
 // },
 // {
-//   id: 7,
+//   id: 15,
 //   label: "Visual Communication Design",
 // },
 
 // BINUS Business School Undergraduate Programs
 // {
-//   id: 1,
+//   id: 16,
 //   label: "Business Creation",
 // },
 // {
-//   id: 2,
+//   id: 17,
 //   label: "Global Business Marketing",
 // },
 // {
-//   id: 3,
+//   id: 18,
 //   label: "International Business Management",
 // },
 // {
-//   id: 4,
+//   id: 19,
 //   label: "Management",
 // },
 // {
-//   id: 5,
+//   id: 20,
 //   label: "Creativepreneurship",
 // },
 // {
-//   id: 6,
+//   id: 21,
 //   label: "Entrepreneurship - Business Creation",
 // },
 
 // School of Accounting
 // {
-//   id: 1,
+//   id: 22,
 //   label: "Accounting",
 // },
 // {
-//   id: 2,
+//   id: 23,
 //   label: "Taxation",
 // },
 // {
-//   id: 3,
+//   id: 24,
 //   label: "Finance",
 // },
 
 // Faculty of Digital Communication and Hotel & Tourism
 // {
-//   id: 1,
+//   id: 25,
 //   label: "Communication - Mass Communication",
 // },
 // {
-//   id: 2,
+//   id: 26,
 //   label: "Communication - Marketing Communication",
 // },
 // {
-//   id: 3,
+//   id: 27,
 //   label: "Hotel Management",
 // },
 // {
-//   id: 4,
+//   id: 28,
 //   label: "Tourism",
 // },
 // {
-//   id: 5,
+//   id: 29,
 //   label: "Communication",
 // },
 // {
-//   id: 6,
+//   id: 30,
 //   label: "Public Relations",
 // },
 
 // Faculty of Humanities
 // {
-//   id: 1,
+//   id: 31,
 //   label: "Law - Business Law",
 // },
 // {
-//   id: 2,
+//   id: 32,
 //   label: "Psychology",
 // },
 // {
-//   id: 3,
+//   id: 33,
 //   label: "Chinese Literature",
 // },
 // {
-//   id: 4,
+//   id: 34,
 //   label: "Japanese Literature",
 // },
 // {
-//   id: 5,
+//   id: 35,
 //   label: "English Literature",
 // },
 // {
-//   id: 6,
+//   id: 36,
 //   label: "International Relations",
 // },
 // {
-//   id: 7,
+//   id: 37,
 //   label: "Primary Teacher Education",
 // },
 
 // Faculty of Engineering
 // {
-//   id: 1,
+//   id: 38,
 //   label: "Architecture",
 // },
 // {
-//   id: 2,
+//   id: 39,
 //   label: "Civil Engineering",
 // },
 // {
-//   id: 3,
+//   id: 40,
 //   label: "Industrial Engineering",
 // },
 // {
-//   id: 4,
+//   id: 41,
 //   label: "Computer Engineering",
 // },
 // {
-//   id: 5,
+//   id: 42,
 //   label: "Biotechnology",
 // },
 // {
-//   id: 6,
+//   id: 43,
 //   label: "Food Technology",
 // },
 
 // Double Program
 // {
-//   id: 1,
+//   id: 44,
 //   label: "Computer Science and Mathematics",
 // },
 // {
-//   id: 2,
+//   id: 45,
 //   label: "Computer Science and Statistics",
 // },
 // {
-//   id: 3,
+//   id: 46,
 //   label: "Accounting and Information Systems",
 // },
 // {
-//   id: 4,
+//   id: 47,
 //   label: "Management and Information Systems",
 // },
 // {
-//   id: 5,
+//   id: 48,
 //   label: "Interactive Design and Technology",
 // },
 // {
-//   id: 6,
+//   id: 49,
 //   label: "Digital Business Innovation",
 // },
 
 // Master Track Programs
 // {
-//   id: 1,
+//   id: 50,
 //   label: "Master of Information Systems Management",
 // },
 // {
-//   id: 2,
+//   id: 51,
 //   label: "Master of Information Technology",
 // },
 // {
-//   id: 3,
+//   id: 52,
 //   label: "Master of Management",
 // },
