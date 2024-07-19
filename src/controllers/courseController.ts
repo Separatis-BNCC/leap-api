@@ -17,6 +17,18 @@ export const createCourse: RequestHandler = async (req, res, next) => {
       region,
     });
 
+    const seedSessionsData = [];
+
+    for (let i = 0; i < data.total_sessions; i++) {
+      seedSessionsData.push({
+        week: i + 1,
+        description: `${data.name} week ${i + 1} description`,
+        course_id: data.id,
+      });
+    }
+
+    await Session.bulkCreate(seedSessionsData);
+
     return successRes(res, {
       name: data.name,
       region: data.region,

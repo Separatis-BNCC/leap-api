@@ -3,30 +3,38 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Courses", {
+    await queryInterface.createTable("ClassSessions", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        allowNull: false,
+      schedule: {
+        type: Sequelize.DATE,
+      },
+      recording: {
         type: Sequelize.STRING,
       },
-      region: {
+      class_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: "Classes",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
-      total_sessions: {
+      session_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        defaultValue: 13,
-      },
-      status: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        defaultValue: 1,
+        references: {
+          model: "Sessions",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,
@@ -40,6 +48,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Courses");
+    await queryInterface.dropTable("ClassSessions");
   },
 };

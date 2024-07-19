@@ -8,7 +8,9 @@ interface CourseAttributes {
   id?: number;
   name: string;
   region: number;
+  total_sessions?: number;
   status?: number;
+  sessions?: any;
 
   updatedAt?: Date;
   deletedAt?: Date;
@@ -16,9 +18,11 @@ interface CourseAttributes {
 }
 
 class Course extends Model<CourseAttributes> implements CourseAttributes {
+  [x: string]: any;
   public id!: number;
   public name!: string;
   public region!: number;
+  public total_sessions!: number;
   public status!: number;
 
   public readonly updatedAt!: Date;
@@ -42,6 +46,14 @@ Course.init(
       validate: {
         notEmpty: {
           msg: "Region required!",
+        },
+      },
+    },
+    total_sessions: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isNumeric: {
+          msg: "Status must be a number!",
         },
       },
     },

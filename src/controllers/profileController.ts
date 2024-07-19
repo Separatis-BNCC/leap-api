@@ -26,8 +26,8 @@ export const createProfile: RequestHandler = async (req, res, next) => {
 
     const data = await Profile.create({
       id,
-      first_name,
-      last_name,
+      first_name: first_name.toLowerCase(),
+      last_name: last_name.toLowerCase(),
       nim,
       birth_date,
       region,
