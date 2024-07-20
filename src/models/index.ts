@@ -1,10 +1,17 @@
-export { default as Credential } from "./credential";
 export { default as Profile } from "./profile";
 export { default as Course } from "./course";
 
+import Credential from "./credential";
 import Class from "./class";
 import Session from "./session";
 import ClassSession from "./classSession";
+import MemberClass from "./memberClass";
+
+Credential.belongsToMany(Class, {
+  through: MemberClass,
+  foreignKey: "credential_id",
+  as: "classes",
+});
 
 Session.belongsToMany(Class, {
   through: ClassSession,
@@ -18,4 +25,10 @@ Class.belongsToMany(Session, {
   as: "sessions",
 });
 
-export { Class, Session };
+Class.belongsToMany(Credential, {
+  through: MemberClass,
+  foreignKey: "class_id",
+  as: "members",
+});
+
+export { Class, Session, Credential };

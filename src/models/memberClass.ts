@@ -2,34 +2,50 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "./connection";
 
-interface ClassSessionAttributes {
+interface MemberClassAttributes {
   id?: number;
-  schedule?: string;
-  recording?: string;
+  is_praetorian: boolean;
+  status?: number;
+  credential_id: number;
   class_id: number;
-  session_id: number;
 
   updatedAt?: Date;
   deletedAt?: Date;
   createdAt?: Date;
 }
 
-class ClassSession
-  extends Model<ClassSessionAttributes>
-  implements ClassSessionAttributes
+class MemberClass
+  extends Model<MemberClassAttributes>
+  implements MemberClassAttributes
 {
   public id!: number;
-  public schedule!: string;
-  public recording!: string;
+  public is_praetorian!: boolean;
+  public status?: number;
+  public credential_id!: number;
   public class_id!: number;
-  public session_id!: number;
 
   public readonly updatedAt!: Date;
   public readonly createdAt!: Date;
 }
 
-ClassSession.init(
+MemberClass.init(
   {
+    is_praetorian: {
+      type: DataTypes.STRING,
+      defaultValue: false,
+    },
+    credential_id: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      validate: {
+        isNumeric: {
+          msg: "Credential ID must be a number!",
+        },
+        notEmpty: {
+          msg: "Credential ID required!",
+        },
+      },
+    },
     class_id: {
       allowNull: false,
       type: DataTypes.INTEGER,
@@ -42,23 +58,11 @@ ClassSession.init(
         },
       },
     },
-    session_id: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      validate: {
-        isNumeric: {
-          msg: "Session ID must be a number!",
-        },
-        notEmpty: {
-          msg: "Session ID required!",
-        },
-      },
-    },
   },
   {
     sequelize: connection,
-    modelName: "ClassSession",
+    modelName: "MemberClass",
   }
 );
 
-export default ClassSession;
+export default MemberClass;

@@ -48,22 +48,6 @@ export const createCourse: RequestHandler = async (req, res, next) => {
 export const getCourses: RequestHandler = async (req, res, next) => {
   try {
     const data = await Course.findAll({
-      include: [
-        {
-          as: "classes",
-          model: Class,
-          attributes: {
-            exclude: ["createdAt", "updatedAt", "course_id"],
-          },
-        },
-        {
-          as: "sessions",
-          model: Session,
-          attributes: {
-            exclude: ["createdAt", "updatedAt", "course_id"],
-          },
-        },
-      ],
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
