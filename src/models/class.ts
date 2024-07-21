@@ -10,6 +10,7 @@ interface ClassAttributes {
   minute: number;
   status?: number;
   course_id: number;
+  members?: any[];
 
   updatedAt?: Date;
   deletedAt?: Date;
@@ -24,6 +25,7 @@ class Class extends Model<ClassAttributes> implements ClassAttributes {
   public minute!: number;
   public status!: number;
   public course_id!: number;
+  public members!: any[];
 
   public readonly updatedAt!: Date;
   public readonly createdAt!: Date;

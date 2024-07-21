@@ -10,6 +10,7 @@ interface CredentialAttributes {
   password: string;
   role: number;
   active?: boolean;
+  classes?: any[];
 
   updatedAt?: Date;
   deletedAt?: Date;
@@ -25,6 +26,7 @@ class Credential
   public password!: string;
   public role!: number;
   public active!: boolean;
+  public classes!: any[];
 
   public readonly updatedAt!: Date;
   public readonly createdAt!: Date;
