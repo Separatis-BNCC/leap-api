@@ -1,6 +1,7 @@
 "use strict";
 import { Model, DataTypes } from "sequelize";
 import connection from "./connection";
+import Content from "./content";
 
 interface SessionAttributes {
   id?: number;
@@ -68,5 +69,7 @@ Session.init(
     modelName: "Session",
   }
 );
+
+Session.hasMany(Content, { foreignKey: "session_id", as: "contents" });
 
 export default Session;

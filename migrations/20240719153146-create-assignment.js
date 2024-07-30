@@ -20,7 +20,8 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
       },
       course_id: {
         allowNull: false,
