@@ -38,7 +38,7 @@ Content.init(
     },
     url: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: {
           msg: "Content URL required!",
@@ -46,10 +46,9 @@ Content.init(
       },
     },
     desc: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1,
+      type: DataTypes.STRING,
       validate: {
-        isNumeric: {
+        notEmpty: {
           msg: "Content description required!",
         },
       },
@@ -66,7 +65,7 @@ Content.init(
   },
   {
     sequelize: connection,
-    modelName: "Course",
+    modelName: "Content",
   }
 );
 

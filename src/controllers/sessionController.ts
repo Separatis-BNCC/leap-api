@@ -6,6 +6,7 @@ import {
   successRes,
 } from "../utils";
 import { Session } from "../models";
+import { Content } from "../models";
 import { ValidationError } from "sequelize";
 
 export const getSession: RequestHandler = async (req, res, next) => {
@@ -18,6 +19,11 @@ export const getSession: RequestHandler = async (req, res, next) => {
       },
       attributes: {
         exclude: ["createdAt", "updatedAt"],
+      },
+      include: {
+        as: "contents",
+        model: Content,
+        attributes: ["id", "content_type", "url", "desc"],
       },
     });
 

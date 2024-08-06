@@ -4,3 +4,4 @@ export * from "./profileRouter";
 export * from "./courseRouter";
 export * from "./classRouter";
 export * from "./sessionRouter";
+export * from "./contentRouter";
