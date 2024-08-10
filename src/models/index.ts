@@ -1,6 +1,7 @@
 export { default as Profile } from "./profile";
 export { default as Course } from "./course";
 export { default as Content } from "./content";
+export { default as Assignment } from "./assignment";
 
 import Credential from "./credential";
 import Class from "./class";
