@@ -3,6 +3,7 @@ import { Model, DataTypes } from "sequelize";
 import connection from "./connection";
 import Class from "./class";
 import Session from "./session";
+import Assignment from "./assignment";
 
 interface CourseAttributes {
   id?: number;
@@ -53,7 +54,7 @@ Course.init(
       type: DataTypes.INTEGER,
       validate: {
         isNumeric: {
-          msg: "Status must be a number!",
+          msg: "Total Session must be a number!",
         },
       },
     },
@@ -75,5 +76,6 @@ Course.init(
 
 Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 Course.hasMany(Session, { foreignKey: "course_id", as: "sessions" });
+Course.hasMany(Assignment, { foreignKey: "course_id", as: "assignments" });
 
 export default Course;
