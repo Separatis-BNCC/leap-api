@@ -5,3 +5,4 @@ export * from "./courseRouter";
 export * from "./classRouter";
 export * from "./sessionRouter";
 export * from "./contentRouter";
+export * from "./assignmentRouter";

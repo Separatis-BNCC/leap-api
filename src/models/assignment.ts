@@ -42,6 +42,10 @@ Assignments.init(
                 notEmpty: {
                     msg: "Assignment deadline required!",
                 },
+                isDate: {
+                    msg: "Asignment deadline must be a date",
+                    args: true,
+                }
             },
         },
         status: {

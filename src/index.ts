@@ -12,6 +12,7 @@ import {
   sessionRouter,
   userRouter,
   contentRouter,
+  assignmentRouter,
 } from "./routes";
 import { responseError } from "./middleware";
 
@@ -35,6 +36,7 @@ app.use("/courses", courseRouter);
 app.use("/classes", classRouter);
 app.use("/sessions", sessionRouter);
 app.use("/contents", contentRouter);
+app.use("/assignments", assignmentRouter);
 app.use("/", authRouter);
 
 // Global error handler

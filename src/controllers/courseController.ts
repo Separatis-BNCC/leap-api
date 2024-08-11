@@ -5,7 +5,7 @@ import {
   errNotFound,
   successRes,
 } from "../utils";
-import { Course, Class, Session } from "../models";
+import { Course, Class, Session, Assignment } from "../models";
 import { ValidationError } from "sequelize";
 
 export const createCourse: RequestHandler = async (req, res, next) => {
@@ -84,6 +84,13 @@ export const getCourse: RequestHandler = async (req, res, next) => {
           model: Session,
           attributes: {
             exclude: ["createdAt", "updatedAt", "course_id"],
+          },
+        },
+        {
+          as: "assignments",
+          model: Assignment,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
           },
         },
       ],
