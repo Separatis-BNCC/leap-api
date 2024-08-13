@@ -31,8 +31,9 @@ Content.init(
       allowNull: false,
       type: DataTypes.STRING,
       validate: {
-        notEmpty: {
-          msg: "Content type required!",
+        isIn: {
+          args: [["link", "document", "video"]],
+          msg: "Content type must be either 'link', 'document', or 'video'!",
         },
       },
     },

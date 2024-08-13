@@ -12,11 +12,7 @@ export const createAssignment: RequestHandler = async (req, res, next) => {
   try {
     const { course_id } = req.body;
 
-    const course = await Course.findOne({
-      where: {
-        id: course_id,
-      },
-    });
+    const course = await Course.findByPk(course_id);
 
     if (!course)
       return errNotFound(next, `Course with id ${course_id} not found!`);
@@ -96,7 +92,7 @@ export const editAssignment: RequestHandler = async (req, res, next) => {
     );
 
     if (!data[0])
-      return errNotFound(next, `Assignment with id ${id} does not exist!`);
+      return errBadRequest(next, `Failed to update assignment with the id ${id}`);
 
     return successRes(res, `Assignment updated!`);
   } catch (err: any) {

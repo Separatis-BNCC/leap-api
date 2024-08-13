@@ -90,7 +90,7 @@ export const getCourse: RequestHandler = async (req, res, next) => {
           as: "assignments",
           model: Assignment,
           attributes: {
-            exclude: ["createdAt", "updatedAt"],
+            exclude: ["createdAt", "updatedAt", "course_id"],
           },
         },
       ],

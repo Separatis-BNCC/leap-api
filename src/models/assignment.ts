@@ -5,7 +5,7 @@ import connection from "./connection";
 interface AssignmentAttributes {
     id?: number;
     url: string;
-    deadline: Date,
+    deadline: Date;
     status?: number;
     course_id: number;
 
