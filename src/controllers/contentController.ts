@@ -72,27 +72,26 @@ export const getContent: RequestHandler = async (req, res, next) => {
 
 export const editContent: RequestHandler = async (req, res, next) => {
   try {
+    type UpdatedFields = {
+      content_type?: "link" | "video" | "document";
+      url?: string;
+      desc?: string;
+    };
+
     const { id } = req.params;
 
     const isContentExist = await Content.findByPk(id);
 
     if (!isContentExist)
-      return errNotFound(next, `Content with id ${id} not found!`);
+      return errNotFound(next, `Failed to create content with id ${id}`);
 
-    const { content_type, url, desc } = req.body;
+    const payload = req.body as UpdatedFields;
 
-    const data = await Content.update(
-      {
-        content_type,
-        url,
-        desc,
+    const data = await Content.update(payload, {
+      where: {
+        id,
       },
-      {
-        where: {
-          id,
-        },
-      }
-    );
+    });
 
     if (!data[0])
       return errNotFound(next, `Content with id ${id} does not exist!`);

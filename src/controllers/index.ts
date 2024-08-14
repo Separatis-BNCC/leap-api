@@ -5,3 +5,4 @@ export * from "./courseController";
 export * from "./classController";
 export * from "./sessionController";
 export * from "./contentController";
+export * from "./assignmentController";
