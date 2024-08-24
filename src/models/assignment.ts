@@ -13,7 +13,7 @@ interface AssignmentAttributes {
     updatedAt?: Date,
 }
 
-class Assignments extends Model<AssignmentAttributes> implements AssignmentAttributes {
+class Assignment extends Model<AssignmentAttributes> implements AssignmentAttributes {
     public id!: number;
     public url!: string;
     public deadline!: Date;
@@ -24,7 +24,7 @@ class Assignments extends Model<AssignmentAttributes> implements AssignmentAttri
     public readonly updatedAt?: Date;
 }
 
-Assignments.init(
+Assignment.init(
     {
         url: {
             allowNull: false,
@@ -73,4 +73,4 @@ Assignments.init(
     }
 );
 
-export default Assignments;
+export default Assignment;
