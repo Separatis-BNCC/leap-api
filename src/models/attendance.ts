@@ -68,4 +68,3 @@ Attendance.init(
 );
 
 export default Attendance;
-//
