@@ -9,6 +9,7 @@ import MemberClass from "./memberClass";
 import MemberAssignment from "./memberAssignment";
 import Assignment from "./assignment";
 import Course from "./course";
+import Attendance from "./attendance";
 
 Credential.belongsToMany(Class, {
   through: MemberClass,
@@ -46,8 +47,20 @@ Assignment.belongsToMany(Credential, {
   as: "members",
 });
 
+Credential.belongsToMany(ClassSession, {
+  through: Attendance,
+  foreignKey: "credential_id",
+  as: "credentials",
+});
+
+ClassSession.belongsToMany(Credential, {
+  through: Attendance,
+  foreignKey: "class_session_id",
+  as: "sessions",
+});
+
 Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 
 Class.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
 
-export { Class, Session, Credential, Assignment, Course };
+export { Class, Session, Credential, Assignment, Course, ClassSession };

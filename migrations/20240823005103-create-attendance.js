@@ -1,37 +1,35 @@
-"use strict";
-
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Assignments", {
+    await queryInterface.createTable('Attendances', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      url: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      deadline: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      status: {
-        allowNull: false,
+      approved: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
       },
-      course_id: {
+      proof: {
+        type: Sequelize.STRING,
+      },
+      credential_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Courses",
+          model: "Credentials",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      class_session_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "ClassSessions",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -44,11 +42,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      },
+      }
     });
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Assignments");
-  },
+    await queryInterface.dropTable('Attendances');
+  }
 };
