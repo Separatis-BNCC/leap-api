@@ -5,10 +5,11 @@ import {
   errNotFound,
   successRes,
 } from "../utils";
-import { Class, Course, Session, Credential } from "../models";
-import { ValidationError } from "sequelize";
+import { Class, Course, Session, Credential, Profile } from "../models";
+import { QueryTypes, ValidationError } from "sequelize";
 import ClassSession from "../models/classSession";
 import MemberClass from "../models/memberClass";
+import sequelize from "../models/connection";
 
 export const createClass: RequestHandler = async (req, res, next) => {
   try {
@@ -115,6 +116,41 @@ export const editClass: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const getClasses: RequestHandler = async (req, res, next) => {
+  try {
+    let data = await sequelize.query(
+      `select
+        c.id,
+        hour,
+        minute,
+        day_of_week,
+        c.name as name,
+        count(c.id) as member_count,
+        co.name as "course.name"
+      from
+        "Classes" as c
+        join "MemberClasses" as m on c.id = m.class_id
+        join "Courses" as co on c.course_id = co.id
+      group by
+        c.id, co.name`,
+      {
+        type: QueryTypes.SELECT,
+      }
+    );
+
+    data = data.map((xClass: any) => {
+      xClass.course = { name: xClass["course.name"] };
+      delete xClass["course.name"];
+
+      return xClass;
+    });
+
+    return successRes(res, data);
+  } catch (err: any) {
+    return errInternalServer(next);
+  }
+};
+
 export const getClassById: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -131,8 +167,15 @@ export const getClassById: RequestHandler = async (req, res, next) => {
           as: "members",
           model: Credential,
           attributes: {
-            exclude: ["createdAt", "updatedAt"],
+            exclude: ["createdAt", "updatedAt", "password"],
           },
+          include: [
+            {
+              as: "profile",
+              model: Profile,
+              attributes: ["first_name", "last_name"],
+            },
+          ],
           through: {
             attributes: [],
           },
