@@ -5,7 +5,14 @@ import {
   errNotFound,
   successRes,
 } from "../utils";
-import { Class, Course, Session, Credential, Profile } from "../models";
+import {
+  Class,
+  Course,
+  Session,
+  Credential,
+  Profile,
+  Assignment,
+} from "../models";
 import { QueryTypes, ValidationError } from "sequelize";
 import ClassSession from "../models/classSession";
 import MemberClass from "../models/memberClass";
@@ -179,6 +186,20 @@ export const getClassById: RequestHandler = async (req, res, next) => {
           through: {
             attributes: [],
           },
+        },
+        {
+          as: "courses",
+          model: Course,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+          include: [
+            {
+              as: "assignments",
+              model: Assignment,
+              attributes: ["id"],
+            },
+          ],
         },
         {
           as: "sessions",
