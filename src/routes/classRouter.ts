@@ -5,6 +5,7 @@ import {
   createClass,
   deleteClass,
   editClass,
+  getClasses,
   getClassById,
   removeMember,
   removePraetorian,
@@ -18,6 +19,7 @@ const classRouter = express.Router();
 
 classRouter.use(authenticationMiddleware);
 classRouter.get("/:id", getClassById);
+classRouter.get("/", getClasses);
 
 classRouter.use(authorizationMiddleware);
 classRouter.post("/", createClass);
