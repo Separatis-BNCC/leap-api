@@ -41,10 +41,10 @@ Attendance.init(
       type: DataTypes.INTEGER,
       validate: {
         isNumeric: {
-          msg: "Class ID must be a number!",
+          msg: "Credential ID must be a number!",
         },
         notEmpty: {
-          msg: "Class ID required!",
+          msg: "Credential ID required!",
         },
       },
     },
