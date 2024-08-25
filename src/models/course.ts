@@ -74,7 +74,6 @@ Course.init(
   }
 );
 
-Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 Course.hasMany(Session, { foreignKey: "course_id", as: "sessions" });
 Course.hasMany(Assignment, { foreignKey: "course_id", as: "assignments" });
 

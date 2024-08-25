@@ -1,5 +1,4 @@
 export { default as Profile } from "./profile";
-export { default as Course } from "./course";
 export { default as Content } from "./content";
 
 import Credential from "./credential";
@@ -9,6 +8,7 @@ import ClassSession from "./classSession";
 import MemberClass from "./memberClass";
 import MemberAssignment from "./memberAssignment";
 import Assignment from "./assignment";
+import Course from "./course";
 
 Credential.belongsToMany(Class, {
   through: MemberClass,
@@ -46,4 +46,8 @@ Assignment.belongsToMany(Credential, {
   as: "members",
 });
 
-export { Class, Session, Credential, Assignment };
+Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
+
+Class.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
+
+export { Class, Session, Credential, Assignment, Course };
