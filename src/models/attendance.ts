@@ -5,7 +5,7 @@ import connection from "./connection";
 interface AttendanceAttributes {
   id?: number;
   approved?: number;
-  proof?: string;
+  proof: string;
   credential_id: number;
   class_session_id: number;
 
@@ -27,11 +27,6 @@ class Attendance extends Model<AttendanceAttributes> implements AttendanceAttrib
 
 Attendance.init(
   {
-    approved: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
     proof: {
       allowNull: false,
       type: DataTypes.STRING,
