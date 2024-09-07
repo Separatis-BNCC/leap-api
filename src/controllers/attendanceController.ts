@@ -6,17 +6,12 @@ import {
   successRes,
 } from "../utils";
 import { ValidationError } from "sequelize";
-import { ClassSession, Credential, Attendance } from "../models";
+import { ClassSession, Attendance } from "../models";
 
 export const createAttendance: RequestHandler = async (req, res, next) => {
   try {
     const { class_session_id } = req.body;
     const user = JSON.parse(req.headers.user as string);
-
-    const memberData = await Credential.findByPk(user.id);
-
-    if (!memberData)
-      return errNotFound(next, `Member with id ${user.id} not found!`);
 
     const classSessionData = await ClassSession.findByPk(class_session_id);
 

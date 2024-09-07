@@ -7,3 +7,4 @@ export * from "./sessionRouter";
 export * from "./contentRouter";
 export * from "./assignmentRouter";
 export * from "./attendanceRouter";
+export * from "./memberDashboardRouter";
