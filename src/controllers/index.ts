@@ -8,3 +8,4 @@ export * from "./contentController";
 export * from "./assignmentController";
 export * from "./attendanceController";
 export * from "./memberDashboardController";
+export * from "./reportCardController";

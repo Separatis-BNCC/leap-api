@@ -10,6 +10,7 @@ import MemberAssignment from "./memberAssignment";
 import Assignment from "./assignment";
 import Course from "./course";
 import Attendance from "./attendance";
+import ReportCard from "./reportCard";
 
 Credential.belongsToMany(Class, {
   through: MemberClass,
@@ -59,8 +60,13 @@ ClassSession.belongsToMany(Credential, {
   as: "sessions",
 });
 
+Credential.hasMany(ReportCard,{
+  foreignKey: "credential_id", 
+  as: "reports"
+})
+
 Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 
 Class.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
 
-export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance };
+export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance, ReportCard};

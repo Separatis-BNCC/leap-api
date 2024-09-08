@@ -15,8 +15,10 @@ import {
   assignmentRouter,
   attendanceRouter,
   memberDashboardRouter,
+  reportCardRouter,
 } from "./routes";
 import { responseError } from "./middleware";
+import { report } from "process";
 
 // Config
 const PORT = process.env.PORT || 3001;
@@ -41,6 +43,7 @@ app.use("/contents", contentRouter);
 app.use("/assignments", assignmentRouter);
 app.use("/attendances", attendanceRouter);
 app.use("/members", memberDashboardRouter);
+app.use("/report-card", reportCardRouter);
 app.use("/", authRouter);
 
 // Global error handler
