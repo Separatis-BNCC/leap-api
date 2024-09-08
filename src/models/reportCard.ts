@@ -1,7 +1,6 @@
 "use strict";
 import { Model, DataTypes } from "sequelize";
 import connection from "./connection";
-import { report } from "process";
 
 interface ReportCardAttributes {
   id?: number;
@@ -46,7 +45,7 @@ ReportCard.init(
       allowNull: false,
       validate:{
         isNumeric:{
-          msg: "Credential_ID required!",
+          msg: "Credential_ID must be a number!",
         },
       }
     }

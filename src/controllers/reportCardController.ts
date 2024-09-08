@@ -51,7 +51,7 @@ export const getReportCard: RequestHandler = async (req, res, next) => {
             },
         });
         if (!data)
-            return errNotFound(next, `ReportCard with id ${id} not found!`);
+            return errNotFound(next, `Report Card with id ${id} not found!`);
         return successRes(res, data);
     }
     catch (err: any) {
@@ -64,7 +64,7 @@ export const editReportCard: RequestHandler = async (req, res, next) => {
         const {id} = req.params;
         const ReportCardExist = await ReportCard.findByPk(id);
         if (!ReportCardExist)
-            return errNotFound(next, `ReportCard with id ${id} not found!`);
+            return errNotFound(next, `Report Card with id ${id} not found!`);
         const {document_url, desc, credential_id} = req.body;
         const data = await ReportCard.update(
             {
@@ -79,8 +79,8 @@ export const editReportCard: RequestHandler = async (req, res, next) => {
         );
 
         if(!data[0])
-            return errBadRequest(next, `Failed to update reportCard with the id ${id}}`);
-        return successRes(res, `reportCard Updated`);
+            return errBadRequest(next, `Failed to update Report Card with the id ${id}}`);
+        return successRes(res, `Report Card Updated`);
     }
     catch(err:any){
         if((err.name = "SequelizeValidationError")){
@@ -101,8 +101,8 @@ export const deleteReportCard: RequestHandler = async (req, res, next) => {
         });
 
         if(!reportCard)
-            return errNotFound(next, `ReportCard with id ${id} not found!`);
-        return successRes(res, `Assignment with id ${id} successfully deleted!`);
+            return errNotFound(next, `Report Card with id ${id} not found!`);
+        return successRes(res, `Report Card with id ${id} successfully deleted!`);
     }
     catch(err:any){
         return errInternalServer(next);

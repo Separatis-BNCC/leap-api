@@ -1,6 +1,5 @@
 export { default as Profile } from "./profile";
 export { default as Content } from "./content";
-export { default as ReportCard } from "./reportCard";
 
 import Credential from "./credential";
 import Class from "./class";
@@ -70,4 +69,4 @@ Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 
 Class.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
 
-export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance };
+export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance, ReportCard};
