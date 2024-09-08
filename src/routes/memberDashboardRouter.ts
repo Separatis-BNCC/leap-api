@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getMemberProfile,
+  editMemberProfile,
 } from "../controllers";
 import {
   authenticationMiddleware,
@@ -11,6 +12,7 @@ const memberDashboardRouter = express.Router();
 
 memberDashboardRouter.use(authenticationMiddleware);
 memberDashboardRouter.get("/profiles", getMemberProfile);
+memberDashboardRouter.patch("/profiles", editMemberProfile);
 
 memberDashboardRouter.use(authorizationMiddleware);
 
