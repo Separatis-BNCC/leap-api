@@ -14,7 +14,7 @@ const attendanceRouter = express.Router();
 attendanceRouter.use(authenticationMiddleware);
 attendanceRouter.post("/", createAttendance);
 attendanceRouter.get("/:id", getAttendance);
-attendanceRouter.put("/:id", editAttendance); // seharusnya ada Praeto middleware
+attendanceRouter.put("/:id", editAttendance);
 
 attendanceRouter.use(authorizationMiddleware);
 

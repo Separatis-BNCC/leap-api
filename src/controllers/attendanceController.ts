@@ -7,6 +7,13 @@ import {
 } from "../utils";
 import { ValidationError } from "sequelize";
 import { ClassSession, Attendance } from "../models";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: "dfhzaqi4c",
+  api_key: "312964993665181",
+  api_secret: "mnrn4F_Tvin1HbQtpUZqzE32BnI",
+});
 
 export const createAttendance: RequestHandler = async (req, res, next) => {
   try {
@@ -27,13 +34,17 @@ export const createAttendance: RequestHandler = async (req, res, next) => {
         class_session_id,
       },
     });
-    if(isDuplicate)
-      return errBadRequest(next, `Attendence with user id ${user.id} and session ${class_session_id} already exist!`);
+    if (isDuplicate)
+      return errBadRequest(
+        next,
+        `Attendence with user id ${user.id} and session ${class_session_id} already exist!`
+      );
 
     const { proof } = req.body;
+    const uploadResult = await cloudinary.uploader.upload(proof);
 
     const data = await Attendance.create({
-      proof,
+      proof: uploadResult.url,
       credential_id: user.id,
       class_session_id,
     });
