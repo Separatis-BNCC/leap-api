@@ -31,13 +31,13 @@ Session.belongsToMany(Class, {
   as: "classes",
 });
 
-ClassSession.belongsToMany(RescheduleHistory,{
+ClassSession.belongsToMany(Class,{
   through: RescheduleHistory, 
   foreignKey: "class_session_id", 
-  as: "sessions",
+  // as: "sessions",
 });
 
-Class.belongsToMany(RescheduleHistory, {
+Class.belongsToMany(ClassSession, {
   through: RescheduleHistory,
   foreignKey: "class_id",
   as: "classes",
