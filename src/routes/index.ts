@@ -9,3 +9,4 @@ export * from "./assignmentRouter";
 export * from "./attendanceRouter";
 export * from "./memberDashboardRouter";
 export * from "./reportCardRouter";
+export * from "./rescheduleHistory";
