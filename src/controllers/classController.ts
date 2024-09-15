@@ -180,7 +180,6 @@ export const getClassById: RequestHandler = async (req, res, next) => {
             {
               as: "profile",
               model: Profile,
-              attributes: ["first_name", "last_name"],
             },
           ],
           through: {
