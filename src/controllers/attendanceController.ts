@@ -7,13 +7,7 @@ import {
 } from "../utils";
 import { ValidationError } from "sequelize";
 import { ClassSession, Attendance } from "../models";
-import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.config({
-  cloud_name: "dfhzaqi4c",
-  api_key: "312964993665181",
-  api_secret: "mnrn4F_Tvin1HbQtpUZqzE32BnI",
-});
 
 export const createAttendance: RequestHandler = async (req, res, next) => {
   try {
@@ -41,10 +35,10 @@ export const createAttendance: RequestHandler = async (req, res, next) => {
       );
 
     const { proof } = req.body;
-    const uploadResult = await cloudinary.uploader.upload(proof);
+    // const uploadResult = await cloudinary.uploader.upload(proof);
 
     const data = await Attendance.create({
-      proof: uploadResult.url,
+      proof,
       credential_id: user.id,
       class_session_id,
     });
