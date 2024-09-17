@@ -4,10 +4,10 @@ import {
   errInternalServer,
   errNotFound,
   successRes,
+  uploadPhotoToCloudinary,
 } from "../utils";
 import { ValidationError } from "sequelize";
 import { ClassSession, Attendance } from "../models";
-
 
 export const createAttendance: RequestHandler = async (req, res, next) => {
   try {
@@ -35,10 +35,11 @@ export const createAttendance: RequestHandler = async (req, res, next) => {
       );
 
     const { proof } = req.body;
-    // const uploadResult = await cloudinary.uploader.upload(proof);
+    const { url, err } = await uploadPhotoToCloudinary(proof);
+    if (err) throw { name: "CloudinaryValidationError", errors: [err] };
 
     const data = await Attendance.create({
-      proof,
+      proof: url!,
       credential_id: user.id,
       class_session_id,
     });
@@ -50,10 +51,12 @@ export const createAttendance: RequestHandler = async (req, res, next) => {
       class_session_id: data.class_session_id,
     });
   } catch (err: any) {
-    if ((err.name = "SequelizeValidationError")) {
+    if (err.name == "SequelizeValidationError") {
       const errors = err.errors?.map((error: ValidationError) => error.message);
 
       return errBadRequest(next, errors);
+    } else if (err.name == "CloudinaryValidationError") {
+      return errBadRequest(next, err.errors);
     }
 
     return errInternalServer(next);
