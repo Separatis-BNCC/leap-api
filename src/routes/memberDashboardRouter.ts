@@ -9,7 +9,7 @@ const memberDashboardRouter = express.Router();
 
 memberDashboardRouter.use(authenticationMiddleware);
 memberDashboardRouter.get("/profiles", getMemberProfile);
-memberDashboardRouter.patch("/profiles", editMemberProfile);
+memberDashboardRouter.put("/profiles", editMemberProfile);
 
 memberDashboardRouter.use(authorizationMiddleware);
 
