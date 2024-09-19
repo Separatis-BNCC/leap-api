@@ -1,8 +1,5 @@
 import express from "express";
-import {
-  getMemberProfile,
-  editMemberProfile,
-} from "../controllers";
+import { getMemberProfile, editMemberProfile } from "../controllers";
 import {
   authenticationMiddleware,
   authorizationMiddleware,

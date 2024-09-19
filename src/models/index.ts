@@ -11,6 +11,7 @@ import Assignment from "./assignment";
 import Course from "./course";
 import Attendance from "./attendance";
 import ReportCard from "./reportCard";
+import RescheduleHistory from "./rescheduleHistory";
 
 Credential.belongsToMany(Class, {
   through: MemberClass,
@@ -27,6 +28,18 @@ Credential.belongsToMany(Assignment, {
 Session.belongsToMany(Class, {
   through: ClassSession,
   foreignKey: "session_id",
+  as: "classes",
+});
+
+ClassSession.belongsToMany(Class,{
+  through: RescheduleHistory, 
+  foreignKey: "class_session_id", 
+  // as: "sessions",
+});
+
+Class.belongsToMany(ClassSession, {
+  through: RescheduleHistory,
+  foreignKey: "class_id",
   as: "classes",
 });
 
@@ -69,4 +82,4 @@ Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 
 Class.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
 
-export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance, ReportCard };
+export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance, ReportCard, RescheduleHistory};
