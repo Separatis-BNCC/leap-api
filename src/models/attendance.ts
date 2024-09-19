@@ -27,6 +27,17 @@ class Attendance extends Model<AttendanceAttributes> implements AttendanceAttrib
 
 Attendance.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    approved: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     proof: {
       allowNull: false,
       type: DataTypes.STRING,

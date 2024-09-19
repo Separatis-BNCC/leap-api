@@ -69,4 +69,4 @@ Course.hasMany(Class, { foreignKey: "course_id", as: "classes" });
 
 Class.belongsTo(Course, { foreignKey: "course_id", as: "courses" });
 
-export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance, ReportCard};
+export { Class, Session, Credential, Assignment, Course, ClassSession, Attendance, ReportCard };
