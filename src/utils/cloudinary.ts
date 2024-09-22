@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-const isBase64 = require("is-base64");
+import isBase64 from "is-base64";
 
 export const uploadPhotoToCloudinary = async (base64: string) => {
   cloudinary.config({

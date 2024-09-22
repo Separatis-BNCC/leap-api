@@ -42,6 +42,12 @@ ClassSession.init(
         },
       },
     },
+    schedule: {
+      type: DataTypes.DATE,
+    },
+    recording: {
+      type: DataTypes.STRING,
+    },
     session_id: {
       allowNull: false,
       type: DataTypes.INTEGER,
