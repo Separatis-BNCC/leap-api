@@ -40,6 +40,30 @@ export const authenticationMiddleware: RequestHandler = async (
   }
 };
 
+export const praetorianMiddleware: RequestHandler = async (req, res, next) => {
+  try {
+    const user = JSON.parse(req.headers.user as string);
+
+    if (user.role !== 2) return errUnauthorized(next);
+
+    return next();
+  } catch (err) {
+    return errInternalServer(next);
+  }
+};
+
+export const adminMiddleware: RequestHandler = async (req, res, next) => {
+  try {
+    const user = JSON.parse(req.headers.user as string);
+
+    if (user.role !== 1) return errUnauthorized(next);
+
+    return next();
+  } catch (err) {
+    return errInternalServer(next);
+  }
+};
+
 export const authorizationMiddleware: RequestHandler = async (
   req,
   res,
