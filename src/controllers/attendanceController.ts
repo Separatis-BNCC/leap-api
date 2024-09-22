@@ -72,7 +72,6 @@ export const getAttendance: RequestHandler = async (req, res, next) => {
         id,
       },
       attributes: {
-        include: ["id", "approved"],
         exclude: ["createdAt", "updatedAt"],
       },
     });
@@ -115,6 +114,66 @@ export const editAttendance: RequestHandler = async (req, res, next) => {
       );
 
     return successRes(res, `Attendance updated!`);
+  } catch (err: any) {
+    if ((err.name = "SequelizeValidationError")) {
+      const errors = err.errors?.map((error: ValidationError) => error.message);
+
+      return errBadRequest(next, errors);
+    }
+
+    return errInternalServer(next);
+  }
+};
+
+export const acceptAttendance: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Attendance.update(
+      {
+        approved: 1,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+
+    if (!data[0])
+      return errNotFound(next, `Attendance with id ${id} does not exist!`);
+
+    return successRes(res, `Approved!`);
+  } catch (err: any) {
+    if ((err.name = "SequelizeValidationError")) {
+      const errors = err.errors?.map((error: ValidationError) => error.message);
+
+      return errBadRequest(next, errors);
+    }
+
+    return errInternalServer(next);
+  }
+};
+
+export const rejectAttendance: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Attendance.update(
+      {
+        approved: -1,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+
+    if (!data[0])
+      return errNotFound(next, `Attendance with id ${id} does not exist!`);
+
+    return successRes(res, `Rejected!`);
   } catch (err: any) {
     if ((err.name = "SequelizeValidationError")) {
       const errors = err.errors?.map((error: ValidationError) => error.message);
