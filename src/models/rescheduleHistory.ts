@@ -18,7 +18,7 @@ class RescheduleHistory
     extends Model<RescheduleHistoryAttributes>
     implements RescheduleHistoryAttributes
 {
-    public id?: number;
+    public id!: number;
     public schedule!: Date;
     public approved!: number;
     public class_session_id!: number;
@@ -30,6 +30,24 @@ class RescheduleHistory
 
 RescheduleHistory.init(
     {
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER,
+        },
+        approved:{
+            allowNull: false, 
+            type: DataTypes.INTEGER,
+            validate:{
+                notEmpty:{
+                    msg: "Approved is required!",
+                },
+                isNumeric:{
+                    msg: "Approved must be a number!",
+                },
+            },
+        },
         schedule: {
             allowNull: false,
             type: DataTypes.DATE,

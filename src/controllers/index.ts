@@ -9,3 +9,4 @@ export * from "./assignmentController";
 export * from "./attendanceController";
 export * from "./memberDashboardController";
 export * from "./reportCardController";
+export * from "./rescheduleHistoryController";

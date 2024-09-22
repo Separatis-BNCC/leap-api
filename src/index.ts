@@ -16,6 +16,7 @@ import {
   attendanceRouter,
   memberDashboardRouter,
   reportCardRouter,
+  rescheduleHistoryRouter,
 } from "./routes";
 import { responseError } from "./middleware";
 import { report } from "process";
@@ -45,6 +46,7 @@ app.use("/assignments", assignmentRouter);
 app.use("/attendances", attendanceRouter);
 app.use("/members", memberDashboardRouter);
 app.use("/report-card", reportCardRouter);
+app.use("/reschedule-history", rescheduleHistoryRouter);
 app.use("/", authRouter);
 
 // Global error handler

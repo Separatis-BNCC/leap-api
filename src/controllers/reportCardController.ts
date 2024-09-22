@@ -65,7 +65,7 @@ export const editReportCard: RequestHandler = async (req, res, next) => {
         const ReportCardExist = await ReportCard.findByPk(id);
         if (!ReportCardExist)
             return errNotFound(next, `Report Card with id ${id} not found!`);
-        const {document_url, desc, credential_id} = req.body;
+        const {document_url, desc} = req.body;
         const data = await ReportCard.update(
             {
                 document_url, 
@@ -79,7 +79,7 @@ export const editReportCard: RequestHandler = async (req, res, next) => {
         );
 
         if(!data[0])
-            return errBadRequest(next, `Failed to update Report Card with the id ${id}}`);
+            return errBadRequest(next, `Failed to update Report Card with the id ${id}`);
         return successRes(res, `Report Card Updated`);
     }
     catch(err:any){
