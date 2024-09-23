@@ -27,6 +27,7 @@ export const createRescheduleHistory: RequestHandler = async (req, res, next) =>
 
         return successRes(res, {
             id: data.id, 
+            approved: data.approved,
             schedule: data.schedule, 
             class_session_id: data.class_session_id,
             class_id: data.class_id

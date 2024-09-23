@@ -39,14 +39,7 @@ RescheduleHistory.init(
         approved:{
             allowNull: false, 
             type: DataTypes.INTEGER,
-            validate:{
-                notEmpty:{
-                    msg: "Approved is required!",
-                },
-                isNumeric:{
-                    msg: "Approved must be a number!",
-                },
-            },
+            defaultValue: 0,
         },
         schedule: {
             allowNull: false,
